@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <main className="p-6 min-h-screen bg-gray-50">
       <h1 className="text-2xl font-bold mb-4">
-        Sky Parking — Counter Dashboard
+        Sky Parking — Counter Dashboard | SKY PARKING HELIPAD
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
