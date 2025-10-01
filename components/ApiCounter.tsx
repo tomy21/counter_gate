@@ -130,8 +130,10 @@ export default function ApiCounter({
               <th className="pr-4">Date</th>
               <th>In Motor</th>
               <th>Out Motor</th>
+              <th className="pl-4">In Area Motor</th>
               <th>In Mobil</th>
               <th>Out Mobil</th>
+              <th className="pl-4">In Area Mobil</th>
               <th className="pl-4">Total In</th>
               <th>Total Out</th>
             </tr>
@@ -140,13 +142,21 @@ export default function ApiCounter({
             {items.slice(0, 10).map((r) => {
               const totalIn = r.CountInMotor + r.CountInMobil;
               const totalOut = r.CountOutMotor + r.CountOutMobil;
+              const totalInareaMotor = r.CountInMotor - r.CountOutMotor;
+              const totalInareaMobil = r.CountInMobil - r.CountOutMobil;
               return (
                 <tr key={r.Id} className="border-t">
                   <td className="py-2 pr-4">{r.Date}</td>
                   <td>{r.CountInMotor}</td>
                   <td>{r.CountOutMotor}</td>
+                  <td className="pl-4 font-semibold text-green-600">
+                    {totalInareaMotor}
+                  </td>
                   <td>{r.CountInMobil}</td>
                   <td>{r.CountOutMobil}</td>
+                  <td className="pl-4 font-semibold text-green-600">
+                    {totalInareaMobil}
+                  </td>
                   <td className="pl-4 font-semibold">{totalIn}</td>
                   <td className="font-semibold">{totalOut}</td>
                 </tr>
