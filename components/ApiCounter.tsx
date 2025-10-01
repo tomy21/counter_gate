@@ -132,18 +132,26 @@ export default function ApiCounter({
               <th>Out Motor</th>
               <th>In Mobil</th>
               <th>Out Mobil</th>
+              <th className="pl-4">Total In</th>
+              <th>Total Out</th>
             </tr>
           </thead>
           <tbody>
-            {items.slice(0, 10).map((r) => (
-              <tr key={r.Id} className="border-t">
-                <td className="py-2 pr-4">{r.Date}</td>
-                <td>{r.CountInMotor}</td>
-                <td>{r.CountOutMotor}</td>
-                <td>{r.CountInMobil}</td>
-                <td>{r.CountOutMobil}</td>
-              </tr>
-            ))}
+            {items.slice(0, 10).map((r) => {
+              const totalIn = r.CountInMotor + r.CountInMobil;
+              const totalOut = r.CountOutMotor + r.CountOutMobil;
+              return (
+                <tr key={r.Id} className="border-t">
+                  <td className="py-2 pr-4">{r.Date}</td>
+                  <td>{r.CountInMotor}</td>
+                  <td>{r.CountOutMotor}</td>
+                  <td>{r.CountInMobil}</td>
+                  <td>{r.CountOutMobil}</td>
+                  <td className="pl-4 font-semibold">{totalIn}</td>
+                  <td className="font-semibold">{totalOut}</td>
+                </tr>
+              );
+            })}
             {items.length === 0 && (
               <tr>
                 <td colSpan={5} className="py-4 text-center text-gray-500">
