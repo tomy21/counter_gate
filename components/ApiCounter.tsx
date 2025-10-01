@@ -149,16 +149,24 @@ export default function ApiCounter({
                   <td className="py-2 pr-4">{r.Date}</td>
                   <td>{r.CountInMotor}</td>
                   <td>{r.CountOutMotor}</td>
-                  <td className="pl-4 font-semibold text-green-600">
+                  <td
+                    className={`font-semibold ${
+                      totalInareaMotor < 0 ? "text-red-600" : "text-green-600"
+                    }`}
+                  >
                     {totalInareaMotor}
                   </td>
                   <td>{r.CountInMobil}</td>
                   <td>{r.CountOutMobil}</td>
-                  <td className="pl-4 font-semibold text-green-600">
+                  <td
+                    className={`font-semibold ${
+                      totalInareaMobil < 0 ? "text-red-600" : "text-green-600"
+                    }`}
+                  >
                     {totalInareaMobil}
                   </td>
-                  <td className="pl-4 font-semibold">{totalIn}</td>
-                  <td className="font-semibold">{totalOut}</td>
+                  <td className="pl-4 font-semibold bg-gray-400">{totalIn}</td>
+                  <td className="font-semibold bg-gray-400">{totalOut}</td>
                 </tr>
               );
             })}
