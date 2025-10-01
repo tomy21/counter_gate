@@ -154,7 +154,7 @@ export default function ApiCounter({
                       totalInareaMotor < 0 ? "text-red-600" : "text-green-600"
                     }`}
                   >
-                    {totalInareaMotor}
+                    {Math.abs(totalInareaMotor)}
                   </td>
                   <td>{r.CountInMobil}</td>
                   <td>{r.CountOutMobil}</td>
@@ -163,7 +163,7 @@ export default function ApiCounter({
                       totalInareaMobil < 0 ? "text-red-600" : "text-green-600"
                     }`}
                   >
-                    {totalInareaMobil}
+                    {Math.abs(totalInareaMobil)}
                   </td>
                   <td className="pl-4 font-semibold bg-gray-400">{totalIn}</td>
                   <td className="font-semibold bg-gray-400">{totalOut}</td>
