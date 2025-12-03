@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // components/ApiCounter.tsx
 "use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 type CounterItem = {
@@ -32,9 +33,11 @@ type ApiResponse = {
 export default function ApiCounter({
   url = process.env.NEXT_PUBLIC_COUNTER_URL!,
   pollInterval = 5000,
+  locationCode,
 }: {
   url?: string;
   pollInterval?: number;
+  locationCode: string;
 }) {
   const [items, setItems] = useState<CounterItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -48,7 +51,7 @@ export default function ApiCounter({
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(url, {
+        const res = await fetch(`${url}?locationCode=${locationCode}`, {
           signal: controller.signal,
           cache: "no-store",
         });
@@ -73,17 +76,29 @@ export default function ApiCounter({
       controller.abort();
       clearInterval(id);
     };
-  }, [url, pollInterval]);
+  }, [url, pollInterval, locationCode]);
 
   const latest = items[0];
 
   const latestTotalIn = latest ? latest.CountInMotor + latest.CountInMobil : 0;
+  const latestLocationName = latest ? latest.LocationName : "";
   const latestTotalOut = latest
     ? latest.CountOutMotor + latest.CountOutMobil
     : 0;
 
   return (
     <div className="p-4 bg-white rounded shadow">
+      <div className="flex flex-row justify-start items-center space-x-4 mb-5">
+        <Link
+          href={"/"}
+          className="bg-red-600/50 py-2 px-4 rounded-xl text-white"
+        >
+          Back
+        </Link>
+        <h1 className="text-2xl font-bold">
+          Sky Parking — Counter Dashboard | {latestLocationName}
+        </h1>
+      </div>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-lg font-medium">Counter (Latest)</h3>
         <div
@@ -119,9 +134,9 @@ export default function ApiCounter({
         </div>
       </div>
 
-      <div className="text-sm text-gray-400 my-4">
+      {/* <div className="text-sm text-gray-400 my-4">
         NOTE : Motor dapat keluar melalui gate mobil
-      </div>
+      </div> */}
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
